@@ -174,35 +174,12 @@ if __name__ == "__main__":
         assert os.path.exists(loadPathRoot)
         assert os.path.exists(savePathRoot)
         loadPath = (loadPathRoot / folder).resolve()
-        # rename
-        # files = os.listdir(loadPath)
-        # for m in range(len(files)):
-        #     cValue = math.floor(m / 100)
-        #     rValue = m - (cValue * 100)
-        #     os.rename(loadPath.__str__().replace("\\", "/") + "/" + files[m], loadPath.__str__().replace("\\", "/") + "/r" + f"{rValue:02d}" + "c" + f"{cValue:02d}" + "f00p00-HUVEC-" + files[m])
-        # segmentation_files = []
-        # name = (
-        #     re.search(re.compile("[[]{1}[A-Za-z0-9_]+[]]{1}"), folder)[0]
-        #     .replace("[", "")
-        #     .replace("]", "")
-        # )
         name = copy.deepcopy(folder)
         experiment_output_folder = os.path.join(savePathRoot, name)
         segmentation_path = experiment_output_folder + "/segmentation"
         mask_path = experiment_output_folder + "/segmentationMask"
         os.makedirs(experiment_output_folder, exist_ok=True)
         os.makedirs(segmentation_path, exist_ok=True)
-        # image_file_information = extract_imagelike_file_information(
-        #             file_path=loadPath,
-        #             search_pattern=search_pattern,
-        #             metadata_pattern=metadata_pattern,
-        #             channelIndex=channelIndex,
-        #             rowIndex=rowIndex,
-        #             colIndex=colIndex,
-        #             zIndex=zIndex,
-        #             FOVIndex=FOVIndex,
-        #             tIndex=tIndex,
-        #         )
 
         # MIEL starts
         experiment_output_folder = (savePathRoot / name).resolve()
@@ -225,10 +202,6 @@ if __name__ == "__main__":
 
             feature_extraction_mod.add_process(extract_features)
             feature_extraction_mod.run()
-
-            # feature_extraction_mod.run_multiprocessing(
-            #     process=devmultiprocessing_feature_extraction
-            # )
 
         except Exception as e:
             logger.error(f"There was an error processing {name}, see below")

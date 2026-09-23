@@ -42,43 +42,21 @@ removeLeft = False
 removeLeftBoundary = -5000
 histPlotRange = 20000 #np.inf
 histRemove = True
-# histRange = [3000, 10500] #KSHV vs LEC
-# histRange = [4000, 10500] #HUVEC DMSO
-# histRange = [1250, 3250] # Shear Stress no drug
-# histRange = [500, 3000] # Shear Stress drug
-# histRange = [0, 2000] # Shear Stress drug
-# histRange = [5000, 12000] #HUVEC sen
-# histRange = [3000, 7000] #HUVEC
-# histRange = [5000, 9500] #HUVEC DMSO
-# histRange = [1000, 4500] #HUVEC DMSO
-# histRange = [3000, 9500] #Hela Susav
 histRange = [0, 100] #Hela Susav
 n_bootstraps = 1
 realBS = False
 optimiseCondense = False
-# condenseCellsTry = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500]
-# condenseCellsTry = [ 1,2,3,4,5,6,7,8,9,10, 20,30,40,50, 100]
-# condenseCellsTry = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]
-# condenseCellsTry = [1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,110,120,130, 140,150]
 condenseCellsTry = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 100, 150, 200]
-# condenseCellsTry = [50, 60]
-# condenseCellsTry = [ 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,125,150,175,200 ]
-# condenseCellsTry = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 optimiseBootstrap = False
 bootstrapsTry = [1,2,3,4,5]
 project_name = "microMIEL-NoSox"
 saveFormat = ".svg"
-# saveDir = "C:/Users/yeww/Downloads/LEC_DMSO vs KLEC_DMSO/"
-# saveDir = "/media/gic/b053d09e-e3ac-4356-848a-0ef98d9db14e/Susav-Miel-data/TIFF/Result/Visual/"/media/gic/b053d09e-e3ac-4356-848a-0ef98d9db14e/Susav-Miel-data/TIFF/Result/Visual/
-# saveDir = r"//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Cell 1/Result/Plots/"
 saveDir = r"//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result/Plots/"
 n_test = 10 # number of test to run to check for confidence
 fontSize = 20
 bin_number_for_plot = 200
 
 manualOrder = False
-# manualOrderList = ["0hr", "0hr GsMT4x", "6hr", "6hr GsMT4x"]
-# condList = ["6hr","6hr_C1", "0hr_C1","60min1", "60min2", "60min3"]
 # groupList = ["6.0hr", "6.0hr", "0.0hrs", "1.0hr", "1.0hr","1.0hr"]
 
 folDir = r"//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result" #AA82-AA90
@@ -415,20 +393,8 @@ groupList = ["No Sox_Pre", "No Sox_Post",
 #            "C719T1_Pre", "C719T1_Post", "C719T1_Others",
 #            "C719T2_Pre", "C719T2_Post", "C719T2_Others"]
 
-# condList = bigList[6:8]
-# groupList = bigList[6:8]
-# condList = ["Pre", "Post", "Others"]
-# groupList = ["Pre", "Post", "Others"]
-
-
-# 
 # channelViewList, maxChannels = ["0", "1", "ALL"], "1"
 channelViewList, maxChannels = ["0"], "0"
-# channelViewList, maxChannels = ["0", "1", "ALL"], "1"
-# channelViewList, maxChannels = ["0", "2", "ALL"], "2"
-# channelViewList, maxChannels = ["ALL"], "2"
-# channelViewList, maxChannels = ["0", "2"], "2"
-# channelViewList, maxChannels = ["0", "1", "2", "3", "ALL"], "3"
 
 ## DO NOT MODIFY BELOW THIS LINE
 os.makedirs(saveDir, exist_ok=True)
@@ -1399,4 +1365,3 @@ if __name__ == "__main__":
     fig.add_vline(x = 50, line_width = 1, line_dash = "dash", line_color = "red")
     fig.show()
     fig.write_image(saveDir + project_name + "_BS_Confidence" + saveFormat)
-    1
