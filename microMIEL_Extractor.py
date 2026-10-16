@@ -8,9 +8,8 @@ from skimage.filters import threshold_multiotsu
 from epilands.image_read_write import save_segmentation_data
 from scipy import ndimage
 
-folSDir = r"\\shared.sydney.edu.au\research-data\PRJ-DataT\Bitong\Bitong HiLo 405\HILO405 without SOX2 Type III"
-folSDir = r"\\shared.sydney.edu.au\research-data\PRJ-DataT\Bitong\Bitong HiLo 405\HILO405 without SOX2 Type III\New"
-outputDir = r"\\shared.sydney.edu.au\research-data\PRJ-DataT\Bitong's data\Bitong HiLo 405\Data for HILO405 analysis\Result"
+folSDir = r"C:\Data"
+outputDir = r"C:\Data\Result"
 
 cellFol = ["Cell 1_1001", "Cell 2_1015", "Cell 3_0919", "Cell 3_1015", "Cell 4_0924", "Cell 4_1015", "Cell 5_1001", "Cell 5_1015",
            "Cell 6_1015", "Cell 7_0924", "Cell 7_1015", "Cell 8_1015", "Cell 9_1015", "Cell 10_1015"]

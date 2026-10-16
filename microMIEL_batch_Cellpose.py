@@ -118,8 +118,8 @@ if __name__ == "__main__":
     import logging
     logger = logging.getLogger("imagepubautomation")
     ############################################################################
-    loadPathRoot = Path("//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result") # edit
-    savePathRoot = Path("//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result") # edit
+    loadPathRoot = Path("C:/Data/Result") # edit
+    savePathRoot = Path("C:/Data/Result") # edit
     search_pattern = ".tif"
     metadata_pattern = re.compile("r([0-9]{2})c([0-9]{2})f([0-9]{2})p([0-9]{2})-([a-zA-Z0-9]{3})")
     channelIndex = 4

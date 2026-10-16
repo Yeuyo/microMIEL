@@ -51,7 +51,7 @@ optimiseBootstrap = False
 bootstrapsTry = [1,2,3,4,5]
 project_name = "microMIEL-NoSox"
 saveFormat = ".svg"
-saveDir = r"//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result/Plots/"
+saveDir = r"C:/Data/Result/Plots/"
 n_test = 10 # number of test to run to check for confidence
 fontSize = 20
 bin_number_for_plot = 200
@@ -59,7 +59,7 @@ bin_number_for_plot = 200
 manualOrder = False
 # groupList = ["6.0hr", "6.0hr", "0.0hrs", "1.0hr", "1.0hr","1.0hr"]
 
-folDir = r"//shared.sydney.edu.au/research-data/PRJ-DataT/Bitong's data/Bitong HiLo 405/Data for HILO405 analysis/Result" #AA82-AA90
+folDir = r"C:/Data/Result" #AA82-AA90
 condList = os.listdir(folDir)
 condList = condList[:-1]
 groupList = copy.deepcopy(condList)
