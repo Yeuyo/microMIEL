@@ -23,6 +23,8 @@ import plotly.graph_objects as go
 import multiprocessing as mp
 from dfply import X, group_by, summarize, summary_functions
 import plotly.io as pio
+from skbio.stats.composition import ilr, multi_replace
+import torch
 
 pio.renderers.default = "browser"
 
@@ -570,6 +572,51 @@ def TAS_Analysis(condenseCells, condenseNumber, removeLeft, removeLeftBoundary, 
                         dataDir = pd.concat([dataDir, data], ignore_index = True)
                         1
 
+        # Feature Debugging (Composition Data)
+        # tasfts = list(dataDir.columns[7:-2])
+        # ftseek = "HUV_TXT_TAS_15_"
+        # print([item for item in tasfts if ftseek in item])
+        # print(dataDir.loc[0,[item for item in tasfts if ftseek in item]].sum())
+
+        # Correction for compositional data
+        dataILR = dataDir.iloc[:, 0:7]
+        tname = "HUV"
+        pcts = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+        lILR = [1, 10, 19]
+        hILR = [10, 19, 28]
+        indPD = pd.DataFrame()
+        for pct in pcts:
+            for tILR in range(3):
+                namelist = [tname + "_TXT_TAS_" + str(n) + "_" + str(pct) for n in range(lILR[tILR], hILR[tILR])]
+                data_clean = dataDir.loc[:, namelist]
+                indILR = data_clean.sum(axis = 1) == 0
+                indPD = pd.concat([indPD, indILR], axis = 1) # get all the list and remove them after
+                data_clean.iloc[indILR, :] = 1 / 9
+                data_clean = multi_replace(data_clean.values)
+                data_clean = torch.tensor(data_clean)
+                data_ilr = ilr(data_clean)
+                data_ilr = pd.DataFrame(data_ilr)
+                if sum(indILR) > 0:
+                    data_ilr.loc[indILR, :] = 0
+                dataILR = pd.concat([dataILR, data_ilr], axis = 1)
+        namelist = [tname + "_TXT_TAS_" + str(n) for n in range(28,37)]
+        data_clean = dataDir.loc[:, namelist]
+        indILR = data_clean.sum(axis = 1) == 0
+        indPD = pd.concat([indPD, indILR], axis = 1) # get all the list and remove them after
+        data_clean.iloc[indILR, :] = 1 / 9
+        data_clean = multi_replace(data_clean.values)
+        data_clean = torch.tensor(data_clean)
+        data_ilr = ilr(data_clean)
+        data_ilr = pd.DataFrame(data_ilr)
+        if sum(indILR) > 0:
+            data_ilr.loc[indILR, :] = 0
+        dataILR = pd.concat([dataILR, data_ilr], axis = 1)
+        dataILR["Path"] = dataDir["Path"]
+        dataILR["Cell"] = dataDir["Cell"]
+        # dsum = dataDir.loc[0,[tname + "_TXT_TAS_1_" + pct, tname + "_TXT_TAS_2_" + pct, tname + "_TXT_TAS_3_" + pct,
+        #                       tname + "_TXT_TAS_4_" + pct, tname + "_TXT_TAS_5_" + pct, tname + "_TXT_TAS_6_" + pct,
+        #                       tname + "_TXT_TAS_7_" + pct, tname + "_TXT_TAS_8_" + pct, tname + "_TXT_TAS_9_" + pct]].sum()
+
         ## Intensity saving
         if groupChannel == True:
             # dataDir.loc[:, ["HUV_object_average_intensity", "Cell"]]
@@ -663,6 +710,8 @@ def TAS_Analysis(condenseCells, condenseNumber, removeLeft, removeLeftBoundary, 
             dataConcat = dataDir.copy()
 
         finalData = dataConcat.copy()
+        finalData = dataILR.copy() # Correction for compositional data
+        dataDir = dataILR.copy() # Correction for compositional data
         #Path PCA
         if condenseCells == True:
             finalData["Cell"] = finalData["Path"]
